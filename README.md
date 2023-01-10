@@ -4,9 +4,18 @@ This project will give an example of a custom function which can be used to spli
 
 ## Table of Contents
 
-[toc]
 
-* [Table of Contents](#table-of-contents)
+* [Split String by Delimiter](#split-string-by-delimiter)
+    * [Table of Contents](#table-of-contents)
+    * [Overview](#overview)
+    * [Split Function](#split-function)
+    * [ESP Example](#esp-example)
+    * [Using Modules](#using-modules)
+    * [Summary](#summary)
+    * [Contributing](#contributing)
+    * [License](#license)
+    * [Additional Resources](additional-resources)
+
 
 ## Overview
 
@@ -174,7 +183,6 @@ This project is licensed under the [SAS License Agreement for Corrective Code or
 
 ## Additional Resources
 
-**Required**. Include any additional resources that users may need or find useful when using your software. Additional resources might include the following:
 
 * [Lua Pattern Matching](https://riptutorial.com/lua/example/20315/lua-pattern-matching)
 * SAS Global Forum papers
