@@ -14,7 +14,7 @@ This project will give an example of a custom function which can be used to spli
     * [Summary](#summary)
     * [Contributing](#contributing)
     * [License](#license)
-    * [Additional Resources](additional-resources)
+    * [Additional Resources](#additional-resources)
 
 
 ## Overview
