@@ -1,0 +1,120 @@
+<project name="splitbydelimiter" pubsub="none" threads="4" heartbeat-interval="1">
+  <description><![CDATA[Lua example which shows how to split a string using a delimiter variable.]]></description>
+  <metadata>
+    <meta id="studioUploadedBy">totuni</meta>
+    <meta id="studioUploaded">1655916609547</meta>
+    <meta id="studioModifiedBy">totuni</meta>
+    <meta id="studioModified">1655923686241</meta>
+    <meta id="streamingAnalytics_softwareVersion">4.0</meta>
+    <meta id="streamingAnalytics_schemaId">d1533f478fa091488a9ea082856c0cc8</meta>
+    <meta id="streamingAnalytics_projectName">raw</meta>
+    <meta id="streamingAnalytics_projectXmlList"/>
+    <meta id="streamingAnalytics_historyInterval">900</meta>
+    <meta id="streamingAnalytics_outputInterval">900</meta>
+    <meta id="streamingAnalytics_scoreOutputRecords">false</meta>
+    <meta id="streamingAnalytics_inputOptions"/>
+    <meta id="streamingAnalytics_outputOptions"/>
+    <meta id="streamingAnalytics_outputfile1">/mnt/viya-share/esp/Common/streamingAnalytics/warehouse/rdy/@MYUSERID@/extract/raw/rawpoints_YYYY_MM_DD_HH_MM_SS_XXXXXX</meta>
+    <meta id="layout">{"cq1":{"Heartbeat":{"x":-235,"y":-400},"copy_raw_to_csv":{"x":330,"y":540},"source_C01_kfka_eventloop":{"x":50,"y":665},"source_C01_kfka_filter":{"x":50,"y":790},"source_C01_kfka_read":{"x":50,"y":1035},"source_C01_kfka_union":{"x":50,"y":540},"source_C01_kfka_update":{"x":50,"y":910},"splitbydelimiter":{"x":-235,"y":-240},"union_data_sources":{"x":190,"y":420}}}</meta>
+    <meta id="studioTags">strings, lua, example</meta>
+  </metadata>
+  <contqueries>
+    <contquery name="cq1" index="pi_EMPTY" trace="ReadfromIntellisense">
+      <windows>
+        <window-source index="pi_EMPTY" insert-only="true" autogen-key="true" name="Heartbeat">
+          <schema>
+            <fields>
+              <field name="id" type="int64" key="true"/>
+              <field name="time" type="stamp"/>
+              <field name="label" type="string"/>
+            </fields>
+          </schema>
+          <connectors>
+            <connector class="timer" name="heartbeats">
+              <properties>
+                <property name="type"><![CDATA[pub]]></property>
+                <property name="label"><![CDATA[heartbeat]]></property>
+                <property name="basetime"><![CDATA[2020-06-08 00:14:00]]></property>
+                <property name="interval"><![CDATA[60]]></property>
+                <property name="unit"><![CDATA[second]]></property>
+              </properties>
+            </connector>
+            <connector class="timer" name="New_Connector_1" connection-name="beat" active="false">
+              <properties>
+                <property name="type"><![CDATA[pub]]></property>
+                <property name="basetime"><![CDATA[2020-01-01]]></property>
+                <property name="interval"><![CDATA[60]]></property>
+                <property name="unit"><![CDATA[second]]></property>
+              </properties>
+            </connector>
+          </connectors>
+        </window-source>
+        <window-lua events="create" name="splitbydelimiter">
+          <schema>
+            <fields>
+              <field name="id" type="int64" key="true"/>
+              <field name="word1" type="string"/>
+              <field name="word2" type="string"/>
+              <field name="word3" type="string"/>
+              <field name="word4" type="string"/>
+              <field name="word5" type="string"/>
+              <field name="word6" type="string"/>
+              <field name="word7" type="string"/>
+            </fields>
+          </schema>
+          <copy exclude="true"><![CDATA[time,label]]></copy>
+          <use><![CDATA[id]]></use>
+          <code><![CDATA[local function splitbydelimiter(
+    s,   -- string value
+    delimiter,  -- string value with defines the delimiter. default is ","
+    item )   -- number:  item in array to return.  Let's say you want the 3rd item parsed from string  "item1,item2,item3"
+             --  if you say 2 item2 will be returned.  Note that Lua arrays start at 1 and not 0.  
+    -- returns table of split items or item entry 
+    answer = {};
+    delimiter1 = delimiter or ","
+    for word in string.gmatch(s,"(.-)"..delimiter1) do
+        table.insert(answer, word);
+        print ("word result...............................", word )
+    end
+    print ("answer .... ", #answer)
+    if #answer == 0 then result = nil    -- return nil if nothing found. 
+    elseif item then  -- does the user want an entry verses a parsed table?
+        if #answer >= item then 
+            result = answer[item]
+        else result = nil     
+        end 
+    else  result = answer    
+    end 
+return result;
+end
+
+
+function create(data,context)
+    local event = {}
+    
+    local teststring = "https://gitlab.sas.com/IOT/tutorials/esp-lua-code-examples/"
+    event.id = data.id
+    event.word1 = splitbydelimiter(teststring,"/",1)
+    event.word2 = splitbydelimiter(teststring,"/",2)
+    event.word3 = splitbydelimiter(teststring,"/",3)
+    event.word4 = splitbydelimiter(teststring,"/",4)
+    event.word4 = splitbydelimiter(teststring,"/",4)
+    event.word5 = splitbydelimiter(teststring,"/",5)
+    event.word6 = splitbydelimiter(teststring,"/",6)
+    event.word7 = splitbydelimiter(teststring,"/",7)
+    
+    if event.word2 == nil  then event.word2 = "nil"  
+    else event.word2 = "blank"    
+    end 
+    if event.word7 == nil  then event.word7 = "nil"  end 
+    
+    return(event)
+end]]></code>
+        </window-lua>
+      </windows>
+      <edges>
+        <edge source="Heartbeat" target="splitbydelimiter"/>
+      </edges>
+    </contquery>
+  </contqueries>
+</project>
