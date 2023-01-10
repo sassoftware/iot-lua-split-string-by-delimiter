@@ -185,7 +185,4 @@ This project is licensed under the [SAS License Agreement for Corrective Code or
 
 
 * [Lua Pattern Matching](https://riptutorial.com/lua/example/20315/lua-pattern-matching)
-* SAS Global Forum papers
-* Blog posts
-* SAS Communities
-* Other SAS Documentation (Tech Support, Education)
+
