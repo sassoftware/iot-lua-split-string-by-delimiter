@@ -6,7 +6,7 @@ This project will give an example of a custom function which can be used to spli
 
 [toc]
 
-* (Table of Contents)[#table-of-contents]
+* [Table of Contents](#table-of-contents)
 
 ## Overview
 
